@@ -6,6 +6,7 @@ $sql = " SELECT * FROM tbl_produto ";
 
 $resultado = mysqli_query($conexao, $sql);
 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +27,22 @@ $resultado = mysqli_query($conexao, $sql);
   <div class="content">
     <section class="produtos-container">
       <main>
-        <form class="form-produto" method="POST" action="taskActions.php">
+        <form class="form-produto" method="POST" action="actions.php">
           <input type="hidden" name="acao" value="inserir" />
           <h1>Cadastro de produto</h1>
+          <ul>
+            <?php
+            // se tiver erros na sessao, listar os erros na tela
+              if(isset($_SESSION["erros"])){
+                foreach($_SESSION["erros"] as $erro){
+            ?>
+                  <li><?= $erro ?></li>
+            <?php
+                }
+                unset($_SESSION["erros"]);
+              }
+            ?>
+          </ul>
           <div class="input-group span2">
             <label for="descricao">Descrição</label>
             <input type="text" name="descricao" id="descricao" placeholder="Digite a descrição do produto" required>
