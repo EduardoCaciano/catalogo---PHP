@@ -1,3 +1,11 @@
+<?php
+/**
+ * NOTICE => notas de erros não críticos
+ * WARNINGS => alertas de erros, mas não fatais. Devem ser tratados.
+ * FATAL_ERRORS => erros graves que impedem o funcionamento do código.
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -16,13 +24,19 @@
     <div class="content">
         <section class="produtos-container">
             <?php
-            // mostrar os botões somente caso o usuário esteja logado
-            // verificar o $_SESSION
+            /**
+              * se existir um usuário na sessão (usuário logado),
+              * mostra os botões.
+            */
+            if(isset($_SESSION["usuarioId"])){
             ?>
-            <header>
-                <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
-                <button>Adicionar Categoria</button>
-            </header>
+                <header>
+                    <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
+                    <button>Adicionar Categoria</button>
+                </header>
+            <?php
+            }
+            ?>
             <main>
                 <article class="card-produto">
                     <figure>
