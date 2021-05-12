@@ -10,11 +10,15 @@
 </head>
 
 <body>
-    <header>
-        <input type="search" placeholder="Pesquisar" />
-    </header>
+    <?php
+        include("../componentes/header/header.php");
+    ?>
     <div class="content">
         <section class="produtos-container">
+            <?php
+            // mostrar os botões somente caso o usuário esteja logado
+            // verificar o $_SESSION
+            ?>
             <header>
                 <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
                 <button>Adicionar Categoria</button>
