@@ -42,13 +42,13 @@ switch ($_REQUEST["acao"]) {
     
     if (!$usuario || !password_verify($senha, $usuario["senha"])){
         // se a senha estiver errada, criar uma mensagem de "usuário e/ou senha inválidos"
-       $erros[] = "Usuários e/ou senha inválidos";
+        $mensagem = "Usuários e/ou senha inválidos";
     }else{
         // se estiver correta, salvar o id e o nome do usuário n a sessão $_SESSION
         $_SESSION["usuarioId"] = $usuario["id"];
         $_SESSION["usuarioNome"] = $usuario["nome"];
     }
-        
+        $mensagem = "Bem vindo," . $usuario["nome"];
         //redirecionar para a tela de listagem de produtos
         header("location: ../../produtos/index.php");
         break;

@@ -91,7 +91,7 @@ switch ($_POST["acao"]) {
                 $mensagem = "Erro ao inserir o produto!";
             }
         
-
+            $_SESSION["mensagem"] = $mensagem;
     //redirecionar para tela de listagem (index.php) com a mensagem
     header("location: index.php");
 

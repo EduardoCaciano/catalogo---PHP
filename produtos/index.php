@@ -4,6 +4,8 @@
  * WARNINGS => alertas de erros, mas não fatais. Devem ser tratados.
  * FATAL_ERRORS => erros graves que impedem o funcionamento do código.
  */
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +24,15 @@
         include("../componentes/header/header.php");
     ?>
     <div class="content">
+        <div style="position:absolute; top: 0;">
+            <?php
+                if(isset($_SESSION["mensagem"])) {
+                    echo $_SESSION["mensagem"];
+
+                    unset($_SESSION["mensagem"]);
+                }
+            ?>
+        </div>
         <section class="produtos-container">
             <?php
             /**
@@ -32,7 +43,7 @@
             ?>
                 <header>
                     <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
-                    <button>Adicionar Categoria</button>
+                    <button onclick="javascript:window.location.href = '../categorias'">Adicionar Categoria</button>
                 </header>
             <?php
             }

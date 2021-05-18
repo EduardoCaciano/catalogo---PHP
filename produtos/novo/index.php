@@ -7,6 +7,14 @@ $sql = " SELECT * FROM tbl_produto ";
 $resultado = mysqli_query($conexao, $sql);
 
 session_start();
+// verifica se o usuário não esta logado
+if(!isset($_SESSION["usuarioId"])){
+    // declara e coloca um erro nas mensagem da sessão
+    $erros = ["Acesso negado, você precisa logar."];
+    $_SESSION["mensagem"] = $erros;
+// redirecionamos para listagem de produtos
+    header("location: ../index.php");
+}
 ?>
 
 <!DOCTYPE html>
