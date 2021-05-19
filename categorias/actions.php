@@ -1,48 +1,68 @@
 <?php
+    session_start();
+
     require("../database/conexao.php");
+
+    function validarCampos(){
+        $erros = [];
+
+        if(!isset($_POST["descricao"]) || $_POST["descricao"] == ""){
+            $erros[] = "O campo descrição é obrigatório";
+        }
+
+        return $erros;
+    }
 
     switch ($_POST["acao"]) {
 
-        case "salvar":
-           //se houver o envio do fomulário com uma descricao
-        if (isset($_POST["descricao"])) {
+        case "inserir":
+
+            $erros = validarCampos();
+
+            if(count($erros) > 0){
+                $_SESSION["mensagem"] = $erros[0];
+
+                header("location: index.php");
+
+                exit();
+            }
+
             $descricao = $_POST["descricao"];
 
             //declara o SQL de inserção
-            $sqlInsert = " INSERT INTO tbl_categoria (descricao) VALUES ('$descricao') ";
+            $sql = " INSERT INTO tbl_categoria (descricao) VALUES ('$descricao') ";
 
             //executa o SQL
-            $resultado = mysqli_query($conexao, $sqlInsert);
+            $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
 
             if($resultado){
-                $mensagem = "Categoria adicionada com sucesso!";
-                $tipoMensagem = "sucesso"; 
+                $_SESSION["mensagem"] = "Categoria adicionada com sucesso!";
+                $tipoMensagem = "Sucesso"; 
             }else{
-                $mensagem = "Erro ao adicionar nova categoria!";
-                $tipoMensagem = "erro"; 
+                $_SESSION["mensagem"] = "Erro ao adicionar nova categoria!";
+                $tipoMensagem = "Erro"; 
             }
-        }
+        
         break;
 
         case "deletar":
-            //verificar se veio o categoriaId
-            if (isset($_POST["categoriaId"])) {
-                $tarefaId = $_POST["categoriaId"];
+
+                $categoriaId = $_POST["categoriaId"];
     
                 //declarar o sql de delete
-                $sqlDelete = " DELETE FROM task_list WHERE id = $tarefaId ";
+                $sqlDelete = " DELETE FROM tbl_categoria WHERE id = $categoriaId ";
     
                 //executar o sql
                 $resultado = mysqli_query($conexao, $sqlDelete);
     
                 if($resultado){
-                    $mensagem = "Tarefa excluída com sucesso!";
+                    $_SESSION["mensagem"] = "Categoria excluída com sucesso!";
                     $tipoMensagem = "sucesso"; 
                 }else{
-                    $mensagem = "Erro ao excluir a tarefa!";
+                    $_SESSION["mensagem"] = "Erro ao excluir a categoria!";
                     $tipoMensagem = "erro"; 
                 }
-            }
+            
             break;
     }
 

@@ -10,13 +10,17 @@ session_start();
 // verifica se o usuário não esta logado
 if(!isset($_SESSION["usuarioId"])){
     // declara e coloca um erro nas mensagem da sessão
-    $erros = ["Acesso negado, você precisa logar."];
-    $_SESSION["mensagem"] = $erros;
+    $_SESSION["mensagem"] = "Acesso negado, você precisa logar.";
+    
+
 // redirecionamos para listagem de produtos
     header("location: ../index.php");
 }
-?>
 
+$sql = " SELECT * FROM tbl_categoria ";
+
+$resultado = mysqli_query($conexao, $sql);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,9 +33,9 @@ if(!isset($_SESSION["usuarioId"])){
 </head>
 
 <body>
-  <header>
-    <input type="search" placeholder="Pesquisar" />
-  </header>
+  <?php
+    include("../../componentes/header/header.php")
+  ?>
   <div class="content">
     <section class="produtos-container">
       <main>
@@ -79,6 +83,22 @@ if(!isset($_SESSION["usuarioId"])){
             <label for="desconto">Desconto</label>
             <input type="text" name="desconto" id="desconto" placeholder="Digite o desconto">
           </div>
+          <div class="input-group">
+            <label for="categoria">Categorias</label>
+            <select type="text" name="categoria" id="categoria">
+              <option value="">SELECIONE</option>
+              <?php
+                while ($categoria = mysqli_fetch_array($resultado)){
+                ?>
+                  <option value="<?php $categoria["id"] ?>">
+                    <?= $categoria["descricao"] ?>
+                  </option>  
+                <?php
+                }
+               ?>
+            </select> 
+          </div>
+          <div></div> 
           <button onclick="javascript:window.location.href = '../'">Cancelar</button>
           <button>Salvar</button>
         </form>

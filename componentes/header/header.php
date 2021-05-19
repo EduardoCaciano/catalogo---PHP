@@ -1,7 +1,25 @@
 <?php
-session_start();
+if(!isset($_SESSION)) session_start();
 ?>
 <link href="/web-backend/web-backend-a/icatalogo-parte1/componentes/header/header.css" rel="stylesheet">
+<?php
+// verifica se há mensagem na sessão
+if (isset($_SESSION["mensagem"])) {
+?>        
+    <div class="mensagem">
+        <?= $_SESSION["mensagem"]; ?>
+    </div>
+    <script lang="javascript">
+        setTimeout(() => {
+        document.querySelector(".mensagem").style.display = "none";
+            
+        }, 4000);
+    </script>
+<?php
+    // retira a mensagem da sessão
+    unset($_SESSION["mensagem"]);
+}
+?>
 <header class="header">
     <figure>
      <img src="/web-backend/web-backend-a/icatalogo-parte1/imgs/logo.png" />
