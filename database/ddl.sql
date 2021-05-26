@@ -28,7 +28,7 @@ create table tbl_administrador (
     senha varchar(255) not null
 );
 
-insert into tbl_administrador (nome, usuario, senha) values ("Helena","Helena","4321");
+insert into tbl_administrador (notbl_produto_ibfk_1me, usuario, senha) values ("Helena","Helena","4321");
 insert into tbl_administrador (nome, usuario, senha) values ("Ciclano da Silva","ciclano","654321");
 select * from tbl_administrador;
 /******************************************************************************************************************************************/
@@ -42,5 +42,15 @@ select * from tbl_categoria;
 # deleta o produto na tabela de produtos com o id ?
 delete from tbl_categoria where id = 2;
 
+select * from tbl_produto;
 
+alter table tbl_produto
+add column categoria_id int,
+add foreign key (categoria_id) references tbl_categoria(id);
 
+#limpar a tabela de produtos
+truncate tbl_produto;
+
+select * from tbl_produto p
+inner join tbl_categoria c on p.categoria_id = c.id 
+order by p.id desc;

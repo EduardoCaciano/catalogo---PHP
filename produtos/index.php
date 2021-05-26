@@ -5,7 +5,41 @@
  * FATAL_ERRORS => erros graves que impedem o funcionamento do código.
  */
 
+ require ("../database/conexao.php");
 
+ $sql = " SELECT p.*, c.descricao as categoria FROM tbl_produto p
+ INNER JOIN tbl_categoria c ON p.categoria_id = c.id
+ ORDER BY p.id DESC ";
+
+$resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
+
+//percorrer os resultado, mostrando um card para cada produto
+
+
+
+//mostrar a imagem do produto (que veio do banco)
+
+
+
+//mostrar o valor do produto
+
+
+
+//mostrar a descricao do produto
+
+
+
+//mostrar a categoria do produto
+
+
+
+//DESAFIO: mostrar a opção de parcelamento
+//SE O VALOR > 1000, PARCELAR EM ATÉ 12x
+//SE NÃO, PARCELAR EM ATÉ 6x
+
+
+
+//DESAFIO2: Implementar o desconto no preço do produto
 ?>
 
 <!DOCTYPE html>
@@ -49,125 +83,6 @@
             }
             ?>
             <main>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
                 <article class="card-produto">
                     <figure>
                         <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />

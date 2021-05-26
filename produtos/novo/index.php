@@ -85,12 +85,12 @@ $resultado = mysqli_query($conexao, $sql);
           </div>
           <div class="input-group">
             <label for="categoria">Categorias</label>
-            <select type="text" name="categoria" id="categoria">
+            <select type="text" name="categoria" id="categoria" required>
               <option value="">SELECIONE</option>
               <?php
                 while ($categoria = mysqli_fetch_array($resultado)){
                 ?>
-                  <option value="<?php $categoria["id"] ?>">
+                  <option value="<?= $categoria["id"] ?>">
                     <?= $categoria["descricao"] ?>
                   </option>  
                 <?php
