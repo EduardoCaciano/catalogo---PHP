@@ -22,9 +22,16 @@ if (isset($_SESSION["mensagem"])) {
 ?>
 <header class="header">
     <figure>
-     <img src="/web-backend/web-backend-a/icatalogo-parte1/imgs/logo.png" />
+     <a href="/web-backend/web-backend-a/icatalogo-parte1/produtos">
+        <img src="/web-backend/web-backend-a/icatalogo-parte1/produtos/imgs/logo.png" />
+    </a>
     </figure>
-    <input type="search" placeholder="Pesquisar" />
+    <form method="GET" action="/web-backend/web-backend-a/icatalogo-parte1/produtos/index.php">
+        <input type="search" name="pesquisar" placeholder="Pesquisar">
+        <button>
+            <img src="/web-backend/web-backend-a/icatalogo-parte1/produtos/imgs/lupa.svg" />
+        </button>
+    </form>
     <?php
     if (!isset($_SESSION["usuarioId"])) {
     ?>

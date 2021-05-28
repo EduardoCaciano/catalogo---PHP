@@ -54,3 +54,9 @@ truncate tbl_produto;
 select * from tbl_produto p
 inner join tbl_categoria c on p.categoria_id = c.id 
 order by p.id desc;
+
+SELECT p.*, c.descricao as categoria FROM tbl_produto p
+INNER JOIN tbl_categoria c ON p.categoria_id = c.id
+WHERE p.descricao LIKE '%?%'
+OR c.descricao LIKE '%?%'
+ORDER BY p.id DESC;
