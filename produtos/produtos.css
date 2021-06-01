@@ -94,3 +94,19 @@
   font-size: 16px;
   color: var(--textSecundary);
 }
+
+.card-produto section img {
+  height: 40px;
+  width: 40px;
+  border: solid 2px black;
+  border-radius: 5px;
+  margin-left: 280px;
+  margin-top: -12px;
+  background-color: rgba(255, 0, 0, 0.808);
+}
+
+.card-produto section > img:hover {
+  border: solid 2px black;
+  border-radius: 5px;
+  transform: scale(1.1);
+}

@@ -8,11 +8,12 @@
  require ("../database/conexao.php");
 
  if(isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "") {
+    $pesquisar = $_GET["pesquisar"];
 
      $sql = " SELECT p.*, c.descricao as categoria FROM tbl_produto p
      INNER JOIN tbl_categoria c ON p.categoria_id = c.id
-     WHERE p.descricao LIKE '%$produto%'
-     OR c.descricao LIKE '%$produto%'
+     WHERE p.descricao LIKE '%$pesquisar%'
+     OR c.descricao LIKE '%$pesquisar%'
      ORDER BY p.id DESC ";
  } else {
     $sql = " SELECT p.*, c.descricao as categoria FROM tbl_produto p
@@ -117,6 +118,14 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
                     <span class="categoria">
                     <em><?= $produto["categoria"] ?></em>
                     </span>
+                    <?php
+                        //verificar o $_SESSION
+                        if(isset($_SESSION["usuarioId"])){
+                        ?>
+                            <img onclick="deletarProduto(<?= $produto['id'] ?>)" src="https://icons.veryicon.com/png/o/construction-tools/coca-design/delete-189.png" />
+                        <?php
+                        }
+                        ?>
                 </section>
                 <footer>
                 </footer>
@@ -124,7 +133,9 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
                 <?php
                 }
                 ?>
-
+                    <form id="form-delecao" style="display: none;" method="POST" action="acoesProduto.php">
+                        <input id="produtoId" type="hidden" name="produtoId" value=""/> 
+                    </form>
             </main>
         </section>
     </div>
@@ -132,5 +143,10 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
         SENAI 2021 - Todos os direitos reservados
     </footer>
 </body>
-
+    <script lang="javascript">
+        function deletarProduto(produtoId){
+            document.querySelector('#produtoId').value = produtoId;
+            document.querySelector('#form-delecao').submit();
+        }
+    </script>
 </html>
