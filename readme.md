@@ -2,16 +2,13 @@
 
 Catálogo para divulgação de produtos.
 
-## 🚀 Começando
+### 🚀 Finalizado
 
-Para iniciar, clone o projeto para dentro da sua pasta htdocs.
+Projeto com base de estrutura em site de vendas, feito na linguagem PHP, clone e teste minha aplicação desenvolvida em sala de aula no Senai - Jandira.
 
-### 📋 Tarefa
-
-Você deve implementar o cadastro de produtos na tela /produtos/novo/index.php
 
 ### 💾 Criação do Banco de Dados
 
-O arquivo para criar a estrutura do banco está em /database/ddl.sql
+O arquivo estrutura do banco está em /database/ddl.sql
 
 Copie, cole e execute o código no seu Mysql Workbench
