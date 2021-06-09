@@ -27,9 +27,19 @@ if (isset($_SESSION["mensagem"])) {
     </a>
     </figure>
     <form method="GET" action="/web-backend/web-backend-a/icatalogo-parte1/produtos/index.php">
-        <input type="search" name="pesquisar" placeholder="Pesquisar">
-        <button>
+        <input type="text" id="pesquisar" name="pesquisar" value="<?= isset($_GET["pesquisar"]) ? $_GET["pesquisar"] : "" ?>" placeholder="Pesquisar">
+        <button <?= isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "" ? "onClick='limparFiltro()'" : "" ?> >
+        <?php
+        if(isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "") {
+        ?>
+            <img src="/web-backend/web-backend-a/icatalogo-parte1/produtos/imgs/limpa.png" />
+        <?php
+        } else {
+        ?>
             <img src="/web-backend/web-backend-a/icatalogo-parte1/produtos/imgs/lupa.svg" />
+        <?php
+        }
+        ?>    
         </button>
     </form>
     <?php
@@ -89,5 +99,9 @@ if (isset($_SESSION["mensagem"])) {
             containerLogin.style.opacity = 0;
             containerLogin.style.height = "0px";
         }
+    }
+
+    function limparFiltro() {
+        document.querySelector("#pesquisar").value = "";
     }
 </script>

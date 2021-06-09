@@ -7,6 +7,20 @@
 
  require ("../database/conexao.php");
 
+//  EXEMPLO 1
+//  $sql = " SELECT p.*, c.descricao as categoria FROM tbl_produto p
+//  INNER JOIN tbl_categoria c ON p.categoria_id = c.id " ;
+
+// if(isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "") {
+//     $pesquisar = $_GET["pesquisar"];
+//     $sql = " WHERE p.descricao LIKE '%$pesquisar%'
+//     OR c.descricao LIKE '%$pesquisar%' ";
+// }
+
+// $sql = " ORDER BY p.id DESC ";
+
+// EXEMPLO 2
+
  if(isset($_GET["pesquisar"]) && $_GET["pesquisar"] != "") {
     $pesquisar = $_GET["pesquisar"];
 
@@ -23,18 +37,6 @@
 
 $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
 
-//percorrer os resultado, mostrando um card para cada produto
-//mostrar a imagem do produto (que veio do banco)
-//mostrar o valor do produto
-//mostrar a descricao do produto
-//mostrar a categoria do produto
-//DESAFIO: mostrar a opção de parcelamento
-//SE O VALOR > 1000, PARCELAR EM ATÉ 12x
-//SE NÃO, PARCELAR EM ATÉ 6x
-
-
-
-//DESAFIO2: Implementar o desconto no preço do produto
 ?>
 
 <!DOCTYPE html>
@@ -98,6 +100,10 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
                 $valorParcela = number_format($valorParcela, 2, ",", ".");
                 ?>
                 <article class="card-produto">
+                    <div class="acoes">
+                        <img onclick="javascript: window.location = './editar/index.php?id=<?= $produto['id'] ?>'" src="../produtos/imgs/edit.svg"/>
+                        <img onclick="deletar(<?= $produto['id'] ?>)" src="../produtos/imgs/delete.svg" />
+                    </div>
                 <figure>
                     <img src="imgs/<?= $produto["imagem"] ?>" />
                 </figure>
@@ -118,14 +124,6 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
                     <span class="categoria">
                     <em><?= $produto["categoria"] ?></em>
                     </span>
-                    <?php
-                        //verificar o $_SESSION
-                        if(isset($_SESSION["usuarioId"])){
-                        ?>
-                            <img onclick="deletarProduto(<?= $produto['id'] ?>)" src="https://icons.veryicon.com/png/o/construction-tools/coca-design/delete-189.png" />
-                        <?php
-                        }
-                        ?>
                 </section>
                 <footer>
                 </footer>
@@ -133,8 +131,9 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
                 <?php
                 }
                 ?>
-                    <form id="form-delecao" style="display: none;" method="POST" action="acoesProduto.php">
-                        <input id="produtoId" type="hidden" name="produtoId" value=""/> 
+                    <form id="formDeletar" method="POST" action="novo/actions.php">
+                        <input type="hidden" name="acao" value="deletar"/>
+                        <input id="produtoId" type="hidden" name="produtoId"/>  
                     </form>
             </main>
         </section>
@@ -142,11 +141,13 @@ $resultado = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
     <footer>
         SENAI 2021 - Todos os direitos reservados
     </footer>
-</body>
     <script lang="javascript">
-        function deletarProduto(produtoId){
-            document.querySelector('#produtoId').value = produtoId;
-            document.querySelector('#form-delecao').submit();
+        function deletar(produtoId){
+            if(confirm("Deseja realmete excluir este produto?")) {
+                document.querySelector("#produtoId").value = produtoId;
+                document.querySelector("#formDeletar").submit();
+            }
         }
     </script>
+</body>
 </html>
